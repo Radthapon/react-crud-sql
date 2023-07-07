@@ -1,5 +1,7 @@
 const express = require('express')
 const mysql = require('mysql2')
+const cors = require('cors')
+
 const app = express()
 const port = 3000
 
@@ -11,6 +13,7 @@ const db = mysql.createConnection({
 })
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
