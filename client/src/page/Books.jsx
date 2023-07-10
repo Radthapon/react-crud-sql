@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import "./books.css"
 import { Link } from 'react-router-dom'
 const Books = () => {
 
@@ -27,6 +28,10 @@ const Books = () => {
             <h2>{book.title_book}</h2>
             <p>{book.desc}</p>
             <span>{book.price}</span>
+            <div className="buttbook">
+              <button className='del'><Link to="">Delete</Link></button>
+              <button className='upd'><Link to="">Update</Link></button>
+            </div>
           </div>
         ))}
       </div>
