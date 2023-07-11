@@ -34,7 +34,7 @@
     cursor: pointer;
 }
 
-.books .book .buttbook button a {
+.books .book .buttbook button {
     padding: 10px 20px;
     border: 1px solid #000000;
     text-decoration: none;
