@@ -13,6 +13,7 @@ const Update = () => {
       try {
         const res = await axios.get("http://localhost:3000/books/"+bookId)
         setPerBook(res.data)
+        
       }catch(err){
         console.log(err);
       }
@@ -23,11 +24,16 @@ const Update = () => {
   return (
       <div className="form">
       <h1>Update THE  Book</h1>
-      <input type="text" name="title" placeholder='title'  />
-      <input type="text" name="desc" placeholder='desc'  />
-      <input type="text" name="cover" placeholder='cover'  />
-      <input type="number" name="price" placeholder='price'  />
-      <button >Update</button>
+      {perBook.map(book => (
+        <div className="book" key={book.id}>
+          <h1>{book.id}</h1>    
+          <input type="text" name="title" placeholder={book.title_book}  />
+          <input type="text" name="desc" placeholder={book.desc}  />
+          <input type="text" name="cover" placeholder={book.imges_book}  />
+          <input type="number" name="price" placeholder={book.price}  />
+          <button>Update</button>
+        </div>
+      ))}
     </div>
   )
 }
