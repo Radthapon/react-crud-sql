@@ -46,7 +46,7 @@ app.post("/books", (req, res) => {
 
 app.delete("/delete/:id", (req, res) => {
   const bookId = req.params.id
-  const q = "DELETE FROM book WHERE id = ?"
+  const q = "DELETE FROM books WHERE id = ?"
 
   db.query(q,[bookId], (err,data) => {
     if (err) return res.json(err)
