@@ -39,7 +39,7 @@ const Books = () => {
             <span>{book.price}</span>
             <div className="buttbook">
               <button className='del' onClick={() => handleDelete(book.id)}>Delete</button>
-              <button className='upd'>Update</button>
+              <button className='upd'><Link to={`/update/${book.id}`}>Update</Link></button>
             </div>
           </div>
         ))}
