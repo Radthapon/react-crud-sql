@@ -21,6 +21,15 @@ const Update = () => {
     facthPerBook()
   },[])
 
+  const handleCilkUpdate = async e => {
+    e.preventDefault()
+    try{
+      await axios.put("http://localhost:3000/books/"+bookId, perBook)
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   return (
       <div className="form">
       <h1>Update THE  Book</h1>
@@ -31,7 +40,7 @@ const Update = () => {
           <input type="text" name="desc" placeholder={book.desc}  />
           <input type="text" name="cover" placeholder={book.imges_book}  />
           <input type="number" name="price" placeholder={book.price}  />
-          <button>Update</button>
+          <button onClick={handleCilkUpdate}>Update</button>
         </div>
       ))}
     </div>
