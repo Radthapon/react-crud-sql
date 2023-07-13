@@ -27,6 +27,15 @@ app.get('/books', (req, res) => {
     })
 })
 
+app.get('/books/:id', (req, res) => {
+  const bookId = req.params.id
+  const q = "SELECT * FROM books WHERE id = ?"
+  db.query(q,bookId, (err, data) => {
+      if (err) return res.json(err)
+      return res.json(data)
+  })
+})
+
 app.post("/books", (req, res) => {
   const q = "INSERT INTO books (`title_book`,`desc`,`imges_book`,`price`) VALUES (?)"
 
@@ -43,6 +52,18 @@ app.post("/books", (req, res) => {
     return res.json("Book has been created successfuly.")
   })
 })
+
+
+app.delete("/delete/:id", (req, res) => {
+  const bookId = req.params.id
+  const q = "DELETE FROM books WHERE id = ?"
+
+  db.query(q,[bookId], (err,data) => {
+    if (err) return res.json(err)
+      return res.json("Book has delete successfuly")
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
