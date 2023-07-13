@@ -4,7 +4,17 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 const Update = () => {
 
+  // data update
+  const [book, setBook] = useState({
+    title:"",
+    desc:"",
+    cover:"",
+    price:"",
+  })
+
+  // Loop data old
   const [perBook,setPerBook] = useState([])
+
   const location = useLocation()
   const bookId = location.pathname.split("/")[2]
 
@@ -13,7 +23,6 @@ const Update = () => {
       try {
         const res = await axios.get("http://localhost:3000/books/"+bookId)
         setPerBook(res.data)
-        
       }catch(err){
         console.log(err);
       }
@@ -21,10 +30,14 @@ const Update = () => {
     facthPerBook()
   },[])
 
+  const handleChange = (e) => {
+    setBook((perv) => ({...perv, [e.target.name]:e.target.value}))
+  }
+
   const handleCilkUpdate = async e => {
     e.preventDefault()
     try{
-      await axios.put("http://localhost:3000/books/"+bookId, perBook)
+      await axios.put("http://localhost:3000/books/"+bookId, book)
     }catch(err){
       console.log(err);
     }
@@ -36,10 +49,10 @@ const Update = () => {
       {perBook.map(book => (
         <div className="book" key={book.id}>
           <h1>{book.id}</h1>    
-          <input type="text" name="title" placeholder={book.title_book}  />
-          <input type="text" name="desc" placeholder={book.desc}  />
-          <input type="text" name="cover" placeholder={book.imges_book}  />
-          <input type="number" name="price" placeholder={book.price}  />
+          <input type="text" name="title" placeholder={book.title_book}  onChange={handleChange}/>
+          <input type="text" name="desc" placeholder={book.desc}  onChange={handleChange}/>
+          <input type="text" name="cover" placeholder={book.imges_book}  onChange={handleChange}/>
+          <input type="number" name="price" placeholder={book.price} onChange={handleChange} />
           <button onClick={handleCilkUpdate}>Update</button>
         </div>
       ))}
